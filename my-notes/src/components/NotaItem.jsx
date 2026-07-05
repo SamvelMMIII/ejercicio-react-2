@@ -1,10 +1,20 @@
-function NotaItem({ nota, onCompleted, onDeleted }) {
+function NotaItem({ nota, onCompleted, onDeleted, onEdit }) {
     const { id, title, description, completed } = nota;
     return (
         <div className={`nota ${completed ? 'nota-tachada' : ''}`}>
-            <h3>{title}</h3><button onClick={() => onDeleted(id)}>X</button>
-            <p>{description}</p>
-            <button onClick={() => onCompleted(id, !completed)}>{!completed ? "Completar" : "Pendiente"}</button>
+            <div className="nota-header">
+                <h3>{title}</h3>
+                <button className="btn-delete" onClick={() => onDeleted(id)}>X</button>
+            </div>
+            <p className="nota-desc">{description}</p>
+            <div className="nota-actions">
+                <button className="btn-action" onClick={() => onCompleted(id, !completed)}>
+                    {!completed ? "Completar" : "Pendiente"}
+                </button>
+                <button className="btn-action btn-edit" onClick={() => onEdit(nota)}>
+                    Editar
+                </button>
+            </div>
         </div>
     )
 }
